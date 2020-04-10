@@ -1,18 +1,7 @@
 defmodule Roll do
   @moduledoc """
-  Documentation for Roll.
+  Roll it is a tool intended for use in executing
+  sql migrations that move data between tables and
+  that are only used to make a refactor.
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Roll.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
