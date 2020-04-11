@@ -1,4 +1,4 @@
-defmodule Mix.Task.Roll.Gen.Migration do
+defmodule Mix.Tasks.Roll.Gen.Migration do
   use Mix.Task
 
   import Macro, only: [camelize: 1, underscore: 1]

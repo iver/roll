@@ -1,4 +1,4 @@
-defmodule Mix.Task.Roll.Migrations do
+defmodule Mix.Tasks.Roll.Migrations do
   use Mix.Task
   import Mix.Ecto
   import Mix.RollSQL

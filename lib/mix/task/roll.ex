@@ -1,4 +1,4 @@
-defmodule Mix.Task.Roll do
+defmodule Mix.Tasks.Roll do
   use Mix.Task
 
   @shortdoc "Prints Roll help information"

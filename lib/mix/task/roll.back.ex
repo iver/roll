@@ -1,4 +1,4 @@
-defmodule Mix.Task.Roll.Back do
+defmodule Mix.Tasks.Roll.Back do
   use Mix.Task
   import Mix.Ecto
   import Mix.RollSQL
