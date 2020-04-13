@@ -24,6 +24,7 @@ defmodule Roll.SchemaMigration do
 
     commands = [
       {:add, :version, :bigint, primary_key: true},
+      {:add, :executed, :boolean, default: false},
       {:add, :inserted_at, :naive_datetime, []}
     ]
 
