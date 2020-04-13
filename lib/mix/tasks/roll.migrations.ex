@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Roll.Migrations do
   use Mix.Task
-  import Mix.Ecto
+  import Mix.Roll
   import Mix.RollSQL
 
   @shortdoc "Displays the repository migration status"
@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Roll.Migrations do
   """
 
   @impl true
-  def run(args, migrations \\ &Ecto.Migrator.migrations/2, puts \\ &IO.puts/1) do
+  def run(args, migrations \\ &Roll.Migrator.migrations/2, puts \\ &IO.puts/1) do
     repos = parse_repo(args)
     {opts, _} = OptionParser.parse!(args, strict: @switches, aliases: @aliases)
 
@@ -50,13 +50,13 @@ defmodule Mix.Tasks.Roll.Migrations do
       ensure_repo(repo, args)
       paths = ensure_migrations_paths(repo, opts)
 
-      case Ecto.Migrator.with_repo(repo, &migrations.(&1, paths), mode: :temporary) do
+      case Roll.Migrator.with_repo(repo, &migrations.(&1, paths), mode: :temporary) do
         {:ok, repo_status, _} ->
           puts.(
             """
             Repo: #{inspect(repo)}
-              Status    Migration ID    Migration Name
-            --------------------------------------------------
+              Status    Migration ID    Migration Name          Executed
+            ---------------------------------------------------------------
             """ <>
               Enum.map_join(repo_status, "\n", fn {status, number, description} ->
                 "  #{format(status, 10)}#{format(number, 16)}#{description}"

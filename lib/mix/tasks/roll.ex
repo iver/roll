@@ -21,7 +21,7 @@ defmodule Mix.Tasks.Roll do
   defp general() do
     Application.ensure_all_started(:ecto)
     Mix.shell().info("Roll v#{Application.spec(:ecto, :vsn)}")
-    Mix.shell().info("A Ecto complement for custom migration for Elixir.")
+    Mix.shell().info("A Ecto complement for migration forward for Elixir.")
     Mix.shell().info("\nAvailable tasks:\n")
     Mix.Tasks.Help.run(["--search", "roll."])
   end
