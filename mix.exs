@@ -60,7 +60,7 @@ defmodule Roll.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto_sql, "~> 3.2.0"},
+      {:ecto_sql, ">= 3.2.0"},
       {:postgrex, "~> 0.15.1", override: true},
       {:credo, "~> 0.7", only: [:dev, :test]},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
