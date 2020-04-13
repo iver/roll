@@ -25,8 +25,8 @@ defmodule Mix.Tasks.Roll.Gen.Migration do
   The repository must be set under `:ecto_repos` in the
   current app configuration or given via the `-r` option.
   ## Examples
-      mix ecto.gen.migration add_posts_table
-      mix ecto.gen.migration add_posts_table -r Custom.Repo
+      mix roll.gen.migration add_posts_table
+      mix roll.gen.migration add_posts_table -r Custom.Repo
   The generated migration filename will be prefixed with the current
   timestamp in UTC which is used for versioning and ordering.
   By default, the migration will be generated to the
@@ -43,13 +43,13 @@ defmodule Mix.Tasks.Roll.Gen.Migration do
   ## Configuration
   If the current app configuration specifies a custom migration module
   the generated migration code will use that rather than the default
-  `Ecto.Migration`:
+  `Roll.Migration`:
       config :ecto_sql, migration_module: MyApplication.CustomMigrationModule
   """
 
   @impl true
   def run(args) do
-    no_umbrella!("ecto.gen.migration")
+    no_umbrella!("roll.gen.migration")
     repos = parse_repo(args)
 
     Enum.map(repos, fn repo ->
@@ -77,14 +77,14 @@ defmodule Mix.Tasks.Roll.Gen.Migration do
           create_file(file, migration_template(assigns))
 
           if open?(file) and Mix.shell().yes?("Do you want to run this migration?") do
-            Mix.Task.run("ecto.migrate", ["-r", inspect(repo)])
+            Mix.Task.run("roll.migrate", ["-r", inspect(repo)])
           end
 
           file
 
         {_, _} ->
           Mix.raise(
-            "expected ecto.gen.migration to receive the migration file name, " <>
+            "expected roll.gen.migration to receive the migration file name, " <>
               "got: #{inspect(Enum.join(args, " "))}"
           )
       end

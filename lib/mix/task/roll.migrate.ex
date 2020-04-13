@@ -70,7 +70,7 @@ defmodule Mix.Tasks.Roll.Migrate do
       `"priv/repo/roll"`. This option may be given multiple times in which case the migrations
       are loaded from all the given directories and sorted as if they were in the same one.
       Note, if you have migrations paths e.g. `a/` and `b/`, and run
-      `mix ecto.migrate --migrations-path a/`, the latest migrations from `a/` will be run (even
+      `mix roll.migrate --migrations-path a/`, the latest migrations from `a/` will be run (even
       if `b/` contains the overall latest migrations.)
   """
 
