@@ -10,7 +10,7 @@ defmodule Roll.SchemaMigration do
   @primary_key false
   schema "roll_migrations" do
     field(:version, :integer)
-    executed(:boolean)
+    field(:executed, :boolean)
 
     timestamps()
   end
