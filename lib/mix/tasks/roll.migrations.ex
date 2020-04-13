@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Roll.Migrations do
   use Mix.Task
-  import Mix.Roll
+  import Mix.Ecto
   import Mix.RollSQL
 
   @shortdoc "Displays the repository migration status"
