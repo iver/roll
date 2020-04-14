@@ -25,7 +25,8 @@ defmodule Roll.SchemaMigration do
     commands = [
       {:add, :version, :bigint, primary_key: true},
       {:add, :executed, :boolean, default: false},
-      {:add, :inserted_at, :naive_datetime, []}
+      {:add, :inserted_at, :naive_datetime, []},
+      {:add, :updated_at, :naive_datetime, []}
     ]
 
     # DDL queries do not log, so we do not need to pass log: false here.
