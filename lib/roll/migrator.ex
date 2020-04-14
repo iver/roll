@@ -382,6 +382,9 @@ defmodule Roll.Migrator do
   """
   @spec run(Ecto.Repo.t(), atom, Keyword.t()) :: [integer]
   def run(repo, direction, opts) do
+    IO.puts("\nRepo: #{inspect(repo)}")
+    IO.puts("\nDirection: #{inspect(direction)}")
+    IO.puts("\nOpts: #{inspect(opts)}")
     run(repo, [migrations_path(repo)], direction, opts)
   end
 
@@ -432,6 +435,10 @@ defmodule Roll.Migrator do
   @spec run(Ecto.Repo.t(), String.t() | [String.t()] | [{integer, module}], atom, Keyword.t()) ::
           [integer]
   def run(repo, migration_source, direction, opts) do
+    IO.puts("\n[R] Repo: #{inspect(repo)}")
+    IO.puts("\n[R] Source: #{inspect(migration_source)}")
+    IO.puts("\n[R] Direction: #{inspect(direction)}")
+    IO.puts("\n[R] Opts: #{inspect(opts)}")
     migration_source = List.wrap(migration_source)
 
     pending =
