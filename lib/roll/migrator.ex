@@ -33,9 +33,6 @@ defmodule Roll.Migrator do
           execute "CREATE TABLE users(id serial PRIMARY_KEY, username text)"
         end
 
-        def down do
-          execute "DROP TABLE users"
-        end
       end
 
   ```
@@ -66,8 +63,8 @@ defmodule Roll.Migrator do
           end
         end
 
-        def rollback(repo, version) do
-          {:ok, _, _} = Roll.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :down, to: version))
+        def migrate(repo, version) do
+          {:ok, _, _} = Roll.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :up, to: version))
         end
 
         defp repos do
@@ -79,14 +76,14 @@ defmodule Roll.Migrator do
   ```
 
   The example above uses `with_repo/3` to make sure the repository is
-  started and then runs all migrations up or a given migration down.
+  started and then runs all migrations up.
   Note you will have to replace `MyApp` and `:my_app` on the first two
   lines by your actual application name. Once the file above is added
   to your application, you can assemble a new release and invoke the
   commands above in the release root like this:
 
       $ bin/my_app eval "MyApp.Release.migrate"
-      $ bin/my_app eval "MyApp.Release.rollback(MyApp.Repo, 20190417140000)"
+      $ bin/my_app eval "MyApp.Release.migrate(MyApp.Repo, 20190417140000)"
 
   """
 
