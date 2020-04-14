@@ -62,12 +62,12 @@ defmodule Roll.Migrator do
 
         def migrate do
           for repo <- repos() do
-            {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :up, all: true))
+            {:ok, _, _} = Roll.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :up, all: true))
           end
         end
 
         def rollback(repo, version) do
-          {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :down, to: version))
+          {:ok, _, _} = Roll.Migrator.with_repo(repo, &Roll.Migrator.run(&1, :down, to: version))
         end
 
         defp repos do
@@ -372,7 +372,11 @@ defmodule Roll.Migrator do
 
   Equivalent to:
 
-      Ecto.Migrator.run(repo, [Ecto.Migrator.migrations_path(repo)], direction, opts)
+  ```elixir
+
+      Roll.Migrator.run(repo, [Roll.Migrator.migrations_path(repo)], direction, opts)
+
+  ```
 
   See `run/4` for more information.
   """
@@ -391,7 +395,11 @@ defmodule Roll.Migrator do
   may also be a list of tuples that identify the version number and
   migration modules to be run, for example:
 
-      Ecto.Migrator.run(Repo, [{0, MyApp.Migration1}, {1, MyApp.Migration2}, ...], :up, opts)
+  ```elixir
+
+      Roll.Migrator.run(Repo, [{0, MyApp.Migration1}, {1, MyApp.Migration2}, ...], :up, opts)
+
+  ```
 
   A strategy (which is one of `:all`, `:step` or `:to`) must be given as
   an option.
@@ -453,7 +461,11 @@ defmodule Roll.Migrator do
 
   Equivalent to:
 
-      Ecto.Migrator.migrations(repo, [Ecto.Migrator.migrations_path(repo)])
+  ```elixir
+
+      Roll.Migrator.migrations(repo, [Roll.Migrator.migrations_path(repo)])
+
+  ```
 
   """
   @spec migrations(Ecto.Repo.t()) :: [{:up | :down, id :: integer(), name :: String.t()}]

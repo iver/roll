@@ -75,7 +75,7 @@ defmodule Mix.Tasks.Roll.Migrate do
   """
 
   @impl true
-  def run(args, migrator \\ &Ecto.Migrator.run/4) do
+  def run(args, migrator \\ &Roll.Migrator.run/4) do
     repos = parse_repo(args)
     {opts, _} = OptionParser.parse!(args, strict: @switches, aliases: @aliases)
 
@@ -105,7 +105,7 @@ defmodule Mix.Tasks.Roll.Migrate do
           &migrator.(&1, paths, :up, opts)
         end
 
-      case Ecto.Migrator.with_repo(repo, fun, [mode: :temporary] ++ opts) do
+      case Roll.Migrator.with_repo(repo, fun, [mode: :temporary] ++ opts) do
         {:ok, _migrated, _apps} ->
           :ok
 
