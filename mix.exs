@@ -7,7 +7,7 @@ defmodule Roll.MixProject do
     [
       app: :roll,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: ">= 1.7.4",
       start_permanent: Mix.env() == :prod,
 
       # Coverage
