@@ -458,8 +458,23 @@ defmodule Roll.Migrator do
         end
       end)
 
-    ensure_no_duplication!(pending)
-    migrate(Enum.map(pending, &load_migration!/1), direction, repo, opts)
+    pending
+    |> remove_executed()
+    |> ensure_no_duplication!()
+    |> Enum.map(&load_migration!/1)
+    |> migrate(direction, repo, opts)
+  end
+
+  defp remove_executed(migrations) do
+    IO.puts("\n to-remove: #{inspect(migrations)}")
+    # {:up, {20200413163550, true}, "** FILE NOT FOUND **"}
+    Enum.reduce(migrations, [], fn {_, {_, flag}, _} = item, acc ->
+      if flag do
+        [item | acc]
+      else
+        acc
+      end
+    end)
   end
 
   @doc """
@@ -626,7 +641,7 @@ defmodule Roll.Migrator do
     end
   end
 
-  defp ensure_no_duplication!([{version, name, _} | t]) do
+  defp ensure_no_duplication!([{{version, _}, name, _} | t]) do
     cond do
       List.keyfind(t, version, 0) ->
         raise Ecto.MigrationError,
@@ -673,7 +688,7 @@ defmodule Roll.Migrator do
   end
 
   defp migrate(migrations, direction, repo, opts) do
-    for {version, mod} <- migrations,
+    for {{version, _}, mod} <- migrations,
         do_direction(direction, repo, version, mod, opts),
         do: version
   end
