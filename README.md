@@ -24,7 +24,7 @@ Goals
 ----
 
 * [x] Automate the creation of migrations that are maintenance
-* [ ] Recorder when execution begins and ends
+* [x] Recorder when execution begins and ends
 * [x] List all migrations and their states
 
 
@@ -36,7 +36,7 @@ It is under construction, but you can add it using as follow:
 ```elixir
 def deps do
   [
-    {:roll, git: "git@github.com:iver/roll.git"}
+    {:roll, "~> 0.1.0"}
   ]
 end
 ```

@@ -371,7 +371,7 @@ defmodule Roll.Migrator do
   end
 
   defp mark_as_executed(repo, version) do
-    query = "update roll_migrations set executed = true where version = $1"
+    query = "UPDATE roll_migrations SET executed = true, updated_at = now() WHERE version = $1"
     Ecto.Adapters.SQL.query!(repo, query, List.wrap(version))
   end
 

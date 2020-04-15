@@ -66,7 +66,7 @@ defmodule Roll.MixProject do
   defp deps do
     [
       {:ecto_sql, ">= 3.2.0"},
-      {:postgrex, "~> 0.15.1", override: true},
+      {:postgrex, "~> 0.15.1"},
       {:credo, "~> 0.7", only: [:dev, :test]},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:ex_doc_makeup, "~> 0.1.0", only: :dev, runtime: false},

@@ -57,11 +57,11 @@ defmodule Mix.Tasks.Roll.Migrations do
           puts.(
             """
             Repo: #{inspect(repo)}
-             Status    Migration ID    Executed    Migration Name
+              Status    Migration ID    Executed    Migration Name
             ---------------------------------------------------------------
             """ <>
               Enum.map_join(repo_status, "\n", fn {status, {number, executed}, description} ->
-                "  #{format(status, 10)}#{format(number, 16)}#{format(executed, 8)} #{description}"
+                "  #{format(status, 10)}#{format(number, 16)}#{format(executed, 9)} #{description}"
               end) <> "\n"
           )
 
