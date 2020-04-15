@@ -176,7 +176,6 @@ defmodule Roll.Migrator do
   """
   @spec migrations_path(Ecto.Repo.t()) :: String.t()
   def migrations_path(repo) do
-    IO.puts("\n REPO: #{inspect(repo)}")
     config = repo.config()
     priv = config[:priv] || "priv/#{repo |> Module.split() |> List.last() |> Macro.underscore()}"
     app = Keyword.fetch!(config, :otp_app)
@@ -440,10 +439,6 @@ defmodule Roll.Migrator do
   @spec run(Ecto.Repo.t(), String.t() | [String.t()] | [{integer, module}], atom, Keyword.t()) ::
           [integer]
   def run(repo, migration_source, direction, opts) do
-    IO.puts("\n[R] Repo: #{inspect(repo)}")
-    IO.puts("\n[R] Source: #{inspect(migration_source)}")
-    IO.puts("\n[R] Direction: #{inspect(direction)}")
-    IO.puts("\n[R] Opts: #{inspect(opts)}")
     migration_source = List.wrap(migration_source)
 
     pending =
@@ -540,8 +535,7 @@ defmodule Roll.Migrator do
 
       meta = Ecto.Adapter.lookup_meta(dynamic_repo)
       query = SchemaMigration.versions(repo, opts[:prefix])
-      IO.puts("\n QUERY: #{inspect(query)}")
-      callback = &fun.(repo.all(&1, timeout: :infinity, log: true))
+      callback = &fun.(repo.all(&1, timeout: :infinity, log: false))
 
       if should_lock? do
         case repo.__adapter__.lock_for_migrations(meta, query, opts, callback) do

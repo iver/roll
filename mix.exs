@@ -51,7 +51,7 @@ defmodule Roll.MixProject do
       maintainers: ["Iván Jaimes"],
       licenses: ["Apache-2.0"],
       links: %{"GitHub" => "https://github.com/iver/roll"},
-      files: ~w(.formatter.exs mix.exs README.md CHANGELOG.md lib)
+      files: ~w(.formatter.exs mix.exs README.md CHANGELOG.md lib assets)
     ]
   end
 

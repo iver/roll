@@ -7,7 +7,8 @@
 </div>
 <div align="center">
 
-[![Coverage Status](https://coveralls.io/repos/github/iver/roll/badge.svg?branch=master)](https://coveralls.io/github/iver/roll?branch=master) [![Build Status](https://travis-ci.org/iver/roll.svg?branch=master)](https://travis-ci.org/iver/roll)
+<a href='https://coveralls.io/github/iver/roll?branch=master'><img src='https://coveralls.io/repos/github/iver/roll/badge.svg?branch=master' alt='Coverage Status' /></a>
+<a href="https://travis-ci.org/iver/roll"><img src="https://travis-ci.org/iver/roll.svg?branch=master"></a>
 
 </div>
 
