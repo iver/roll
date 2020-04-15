@@ -34,7 +34,10 @@ defmodule Roll.SchemaMigration do
   end
 
   def versions(repo, prefix) do
-    from(p in get_source(repo), select: type(p.version, :integer))
+    from(
+      p in get_source(repo),
+      select: {type(p.version, :integer), type(p.executed, :boolean)}
+    )
     |> Map.put(:prefix, prefix)
   end
 
