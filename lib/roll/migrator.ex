@@ -360,7 +360,13 @@ defmodule Roll.Migrator do
   defp attempt(repo, version, module, direction, operation, reference, opts) do
     if Code.ensure_loaded?(module) and
          function_exported?(module, operation, 0) do
-      Runner.run(repo, version, module, direction, operation, reference, opts)
+      result = Runner.run(repo, version, module, direction, operation, reference, opts)
+      IO.puts("\n attempt: #{inspect(result)}")
+
+      case result do
+        :ok -> IO.puts("Todo OK")
+      end
+
       :ok
     end
   end
