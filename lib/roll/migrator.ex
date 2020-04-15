@@ -595,6 +595,7 @@ defmodule Roll.Migrator do
     migration_source
     |> migrations_for()
     |> Enum.filter(fn {version, _name, _file} -> not (version in versions) end)
+    |> Enum.reduce([], fn data, acc -> [format_version(data) | acc] end)
   end
 
   defp pending_in_direction(versions, migration_source, :down) do
@@ -603,6 +604,8 @@ defmodule Roll.Migrator do
     |> Enum.filter(fn {version, _name, _file} -> version in versions end)
     |> Enum.reverse()
   end
+
+  defp format_version({id, name, path}), do: {{id, false}, name, path}
 
   defp migrations_for(migration_source) when is_list(migration_source) do
     migration_source
