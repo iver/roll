@@ -45,3 +45,4 @@ clean:
 	mix clean
 	mix deps.clean --all
 	rm -rf doc/ docs.tar.gz
+	rm -rf roll-* erl_crash.dump tmp
