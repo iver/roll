@@ -440,10 +440,10 @@ defmodule Roll.Migrator do
   @spec run(Ecto.Repo.t(), String.t() | [String.t()] | [{integer, module}], atom, Keyword.t()) ::
           [integer]
   def run(repo, migration_source, direction, opts) do
-    # IO.puts("\n[R] Repo: #{inspect(repo)}")
-    # IO.puts("\n[R] Source: #{inspect(migration_source)}")
-    # IO.puts("\n[R] Direction: #{inspect(direction)}")
-    # IO.puts("\n[R] Opts: #{inspect(opts)}")
+    IO.puts("\n[R] Repo: #{inspect(repo)}")
+    IO.puts("\n[R] Source: #{inspect(migration_source)}")
+    IO.puts("\n[R] Direction: #{inspect(direction)}")
+    IO.puts("\n[R] Opts: #{inspect(opts)}")
     migration_source = List.wrap(migration_source)
 
     pending =
@@ -540,7 +540,8 @@ defmodule Roll.Migrator do
 
       meta = Ecto.Adapter.lookup_meta(dynamic_repo)
       query = SchemaMigration.versions(repo, opts[:prefix])
-      callback = &fun.(repo.all(&1, timeout: :infinity, log: false))
+      IO.puts("\n QUERY: #{inspect(query)}")
+      callback = &fun.(repo.all(&1, timeout: :infinity, log: true))
 
       if should_lock? do
         case repo.__adapter__.lock_for_migrations(meta, query, opts, callback) do
@@ -575,12 +576,14 @@ defmodule Roll.Migrator do
         version >= target
     end
 
-    pending_in_direction(versions, migration_source, direction)
+    versions
+    |> pending_in_direction(migration_source, direction)
     |> Enum.take_while(&within_target_version?.(&1, target, direction))
   end
 
   defp pending_step(versions, migration_source, direction, count) do
-    pending_in_direction(versions, migration_source, direction)
+    versions
+    |> pending_in_direction(migration_source, direction)
     |> Enum.take(count)
   end
 
@@ -605,7 +608,8 @@ defmodule Roll.Migrator do
     migration_source
     |> Enum.flat_map(fn
       directory when is_binary(directory) ->
-        Path.join([directory, "**", "*.exs"])
+        [directory, "**", "*.exs"]
+        |> Path.join()
         |> Path.wildcard()
         |> Enum.map(&extract_migration_info/1)
         |> Enum.filter(& &1)
