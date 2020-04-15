@@ -312,6 +312,10 @@ defmodule Roll.Migrator do
         verbose_schema_migration(repo, "update schema migrations", fn ->
           apply(SchemaMigration, direction, [repo, version, opts[:prefix]])
         end)
+
+        verbose_schema_migration(repo, "update executed migration", fn ->
+          mark_as_executed(repo, version)
+        end)
       catch
         kind, error ->
           Task.shutdown(task, :brutal_kill)
@@ -360,11 +364,7 @@ defmodule Roll.Migrator do
   defp attempt(repo, version, module, direction, operation, reference, opts) do
     if Code.ensure_loaded?(module) and
          function_exported?(module, operation, 0) do
-      repo
-      |> Runner.run(version, module, direction, operation, reference, opts)
-      |> case do
-        :ok -> mark_as_executed(repo, version)
-      end
+      Runner.run(repo, version, module, direction, operation, reference, opts)
 
       :ok
     end
