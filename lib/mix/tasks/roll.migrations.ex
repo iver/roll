@@ -54,7 +54,10 @@ defmodule Mix.Tasks.Roll.Migrations do
         {:ok, repo_status, _} ->
           puts.(
             """
+
             Repo: #{inspect(repo)}
+            ------------------------
+
               Status    Migration ID    Executed   Migration Name
             ---------------------------------------------------------------
             """ <>
