@@ -60,8 +60,8 @@ defmodule Mix.Tasks.Roll.Migrations do
               Status    Migration ID    Migration Name          Executed
             ---------------------------------------------------------------
             """ <>
-              Enum.map_join(repo_status, "\n", fn {status, number, description} ->
-                "  #{format(status, 10)}#{format(number, 16)}#{description}"
+              Enum.map_join(repo_status, "\n", fn {status, {number, executed}, description} ->
+                "  #{format(status, 10)}#{format(number, 16)}#{description}  #{executed}"
               end) <> "\n"
           )
 
