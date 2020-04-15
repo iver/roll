@@ -25,3 +25,4 @@ roll-*.tar
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+.DS_Store
