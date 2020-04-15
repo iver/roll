@@ -360,7 +360,7 @@ defmodule Roll.Migrator do
     receive do: (^ref -> value)
   end
 
-  defp attempt(repo, version, module, direction, operation, reference, opts) do
+  defp attempt(repo, {version, false}, module, direction, operation, reference, opts) do
     if Code.ensure_loaded?(module) and
          function_exported?(module, operation, 0) do
       Runner.run(repo, version, module, direction, operation, reference, opts)

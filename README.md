@@ -18,7 +18,7 @@ Description
 Library geared toward managing single-run migrations, such as migrating data from one table to another, updating catalogs or maintaining operations.
  
 <div align="center">
-	<img src="assets/screenshot.png" alt="screen" width="650px" /> 
+	<img src="https://raw.githubusercontent.com/iver/roll/v0.1.0/assets/screenshot.png" alt="screen" width="650px" /> 
 </div>
 
 Goals
