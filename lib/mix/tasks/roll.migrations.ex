@@ -52,6 +52,8 @@ defmodule Mix.Tasks.Roll.Migrations do
 
       case Roll.Migrator.with_repo(repo, &migrations.(&1, paths), mode: :temporary) do
         {:ok, repo_status, _} ->
+          IO.puts("\n RStatus: #{inspect(repo_status)}")
+
           puts.(
             """
             Repo: #{inspect(repo)}
