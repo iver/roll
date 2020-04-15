@@ -360,15 +360,19 @@ defmodule Roll.Migrator do
   defp attempt(repo, version, module, direction, operation, reference, opts) do
     if Code.ensure_loaded?(module) and
          function_exported?(module, operation, 0) do
-      result = Runner.run(repo, version, module, direction, operation, reference, opts)
-      IO.puts("\n attempt: #{inspect(result)}")
-
-      case result do
-        :ok -> IO.puts("Todo OK")
+      repo
+      |> Runner.run(version, module, direction, operation, reference, opts)
+      |> case do
+        :ok -> mark_as_executed(repo, version)
       end
 
       :ok
     end
+  end
+
+  defp mark_as_executed(repo, version) do
+    query = "update roll_migrations set executed = true where version = $1"
+    Ecto.Adapters.SQL.query!(repo, query, version)
   end
 
   @doc """
