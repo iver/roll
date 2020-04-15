@@ -176,6 +176,7 @@ defmodule Roll.Migrator do
   """
   @spec migrations_path(Ecto.Repo.t()) :: String.t()
   def migrations_path(repo) do
+    IO.puts("\n REPO: #{inspect(repo)}")
     config = repo.config()
     priv = config[:priv] || "priv/#{repo |> Module.split() |> List.last() |> Macro.underscore()}"
     app = Keyword.fetch!(config, :otp_app)
@@ -379,9 +380,6 @@ defmodule Roll.Migrator do
   """
   @spec run(Ecto.Repo.t(), atom, Keyword.t()) :: [integer]
   def run(repo, direction, opts) do
-    IO.puts("\nRepo: #{inspect(repo)}")
-    IO.puts("\nDirection: #{inspect(direction)}")
-    IO.puts("\nOpts: #{inspect(opts)}")
     run(repo, [migrations_path(repo)], direction, opts)
   end
 

@@ -98,8 +98,6 @@ defmodule Mix.Tasks.Roll.Migrate do
       paths = ensure_migrations_paths(repo, opts)
       pool = repo.config[:pool]
 
-      IO.puts("\nOpts: #{inspect(opts)}")
-
       fun =
         if Code.ensure_loaded?(pool) and function_exported?(pool, :unboxed_run, 2) do
           &pool.unboxed_run(&1, fn -> migrator.(&1, paths, :up, opts) end)

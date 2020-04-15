@@ -17,7 +17,7 @@ Description
 Library geared toward managing single-run migrations, such as migrating data from one table to another, updating catalogs or maintaining operations.
  
 <div align="center">
-	<img src="assets/screenshot.png" alt="screen" /> 
+	<img src="assets/screenshot.png" alt="screen" width="650px" /> 
 </div>
 
 Goals

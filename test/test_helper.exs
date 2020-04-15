@@ -6,6 +6,7 @@ Logger.configure(level: :info)
 
 Code.require_file("test_repo.exs", __DIR__)
 Code.require_file("support/file_helpers.exs", __DIR__)
+Code.require_file("support/repo_helper.exs", __DIR__)
 ExUnit.start()
 
 if function_exported?(ExUnit, :after_suite, 1) do
