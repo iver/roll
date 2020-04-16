@@ -468,7 +468,7 @@ defmodule Roll.Migrator do
   defp remove_executed(migrations) do
     IO.puts("\n to-remove: #{inspect(migrations)}")
     # {:up, {20200413163550, true}, "** FILE NOT FOUND **"}
-    Enum.reduce(migrations, [], fn {_, {_, flag}, _} = item, acc ->
+    Enum.reduce(migrations, [], fn {{_, flag}, _, _} = item, acc ->
       if flag do
         [item | acc]
       else
